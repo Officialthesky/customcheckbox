@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import React, { useState } from "react";
 function App() {
+  const data = [
+    { name: "CUSTOM", boxcolor: "black", id: 1 },
+    { name: "CHECK", boxcolor: "red", id: 2 },
+    { name: "BOX", boxcolor: "green", id: 3 },
+  ];
+  const [selectedId, setSelectedId] = useState();
+
+  const changeButtonColor = (id) => {
+    if (selectedId === id) {
+      setSelectedId();
+    } else {
+      setSelectedId(id);
+    }
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {data.map((item, index) => {
+        return (
+          <div key={index} className="boxDivision">
+            <button
+              onClick={() => changeButtonColor(item.id)}
+              style={{
+                backgroundColor:
+                  selectedId === item.id ? "cornsilk" : "darkslategray",
+              }}
+            >
+              {item.name}
+            </button>
+          </div>
+        );
+      })}
     </div>
   );
 }
