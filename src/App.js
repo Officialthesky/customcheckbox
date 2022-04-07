@@ -2,17 +2,19 @@ import "./App.css";
 import React, { useState } from "react";
 function App() {
   const data = [
-    { name: "CUSTOM", boxcolor: "black", id: 1 },
-    { name: "CHECK", boxcolor: "red", id: 2 },
-    { name: "BOX", boxcolor: "green", id: 3 },
+    { name: "CUSTOM", boxcolor: "white", id: 1 },
+    { name: "CHECK", boxcolor: "black", id: 2 },
+    { name: "BOX", boxcolor: "snow", id: 3 },
   ];
   const [selectedId, setSelectedId] = useState();
+  const [selectedName, setSelectedName] = useState("");
 
   const changeButtonColor = (id) => {
     if (selectedId === id) {
       setSelectedId();
     } else {
       setSelectedId(id);
+      setSelectedName("Clicked!");
     }
   };
   return (
@@ -24,10 +26,10 @@ function App() {
               onClick={() => changeButtonColor(item.id)}
               style={{
                 backgroundColor:
-                  selectedId === item.id ? "cornsilk" : "darkslategray",
+                  selectedId === item.id ? item.boxcolor : "darkslategray",
               }}
             >
-              {item.name}
+              {selectedId === item.id ? selectedName : item.name}
             </button>
           </div>
         );
